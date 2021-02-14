@@ -1,0 +1,35 @@
+<div class="container-fluid">
+<div class="row">
+<% @music_instruments.each do |music_instrument| %>
+<% if current_user.id == music_instrument.user_id %>
+<div class="col-md-4">
+    <div class="card">
+      <div class="mx-auto d-block">
+        <% (0...music_instrument.images.count).each do |image| %>
+      <%= image_tag(music_instrument.images[image], style: 'height:200px; width:100px;')if music_instrument.images.attached?%>
+      <%end%>
+      </div>
+      <div class="px-4">
+    <span>Rs <%= music_instrument.price %></span>
+    </div>
+    <div class="px-4">
+   <span> Item tittle - <%= music_instrument.item_tittle %>, User -<td><%= music_instrument.user.name %></td></span>
+   </div>
+   <div class="row">
+     <div class="col-4">
+   <td><%= link_to 'Show', music_instrument %></td>
+   </div>
+
+
+        <div class="col-4">
+        <td><%= link_to 'Edit', edit_music_instrument_path(music_instrument) %></td>
+        </div>
+        <td><%= link_to 'Destroy', music_instrument, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+</div>
+</div>

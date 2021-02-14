@@ -1,0 +1,17 @@
+<%= form_for [@music_instrument, Review.new] do |form| %>
+
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feedback %>
+    <%= form.text_area :feedback %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Add Review"%>
+  </div>
+<% end %>

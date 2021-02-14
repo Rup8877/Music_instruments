@@ -1,0 +1,75 @@
+
+<% (0...@music_instrument.images.count).each do |image| %>
+ <%= image_tag(@music_instrument.images[image])%>
+<%end%>
+
+<p>
+  <strong>Item tittle:</strong>
+  <%= @music_instrument.item_tittle %>
+</p>
+
+<p>
+  <strong>music_category:</strong>
+  <%= @music_instrument.music_category.category %>
+</p>
+
+<p>
+  <strong>Item description:</strong>
+  <%= @music_instrument.item_description %>
+</p>
+
+<p>
+  <strong>User name:</strong>
+  <%= @music_instrument.user.name %>
+</p>
+
+
+<p>
+  <strong>role:</strong>
+  <%= @music_instrument.role %>
+</p>
+
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @music_instrument.phone_number %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @music_instrument.price %>
+</p>
+
+<% if @music_instrument.approved_by == true%>
+
+<p>
+  <% if  current_user.id != @music_instrument.user_id %>
+        <%= link_to "chat", conversations_path(sender_id: current_user.id, recipient_id: @music_instrument.user.id), method: 'post', class:"button is-link" %>
+      <% else current_user.id == @music_instrument.user_id  %>
+        <%= link_to "Conversations", conversations_path %>
+      <% end%>
+</p>
+
+    <p>
+    <strong> Avg review </strong> <%= @avg_review %> <br>
+    </p>
+<p>
+<em><%= "#{@reviews.length} reviews" %></em>
+</p>
+<p>
+<tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.rating %></td>
+      <td><%= review.feedback %></td>
+      </tr>
+      </tbody>
+      <%end%>
+    </p>
+    <%=render 'reviews/form'%>
+<%end%>
+
+<% if @music_instrument.approved_by == false%>
+<%= link_to 'Edit', edit_music_instrument_path(@music_instrument) %>
+<%= link_to 'Back', music_instruments_path %>
+<%end%>

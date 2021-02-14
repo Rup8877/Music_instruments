@@ -1,0 +1,34 @@
+@import "bootstrap/scss/bootstrap";
+
+.alert
+{
+  position:fixed;
+}
+.slider
+{
+background-color:black;
+height:216px;
+width:268px;
+}
+.arrow_right {
+  right: 0;
+  height: 5px;
+}
+
+.arrow_left {
+  left: 0;
+  transform: rotate(180deg);
+
+  height:200px;
+}
+
+
+
+
+
+@media (min-width: 768px) {
+  .h-md-100 {height: 100vh;}
+}
+.btn-round { border-radius: 30px;}
+.bg-indigo {background: indigo;}
+.text-cyan { color: #35bdff;}
