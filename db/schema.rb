@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_163158) do
+ActiveRecord::Schema.define(version: 2021_02_19_193540) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,14 @@ ActiveRecord::Schema.define(version: 2021_02_12_163158) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "music_category_id", null: false
+    t.index ["music_category_id"], name: "index_sub_categories_on_music_category_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -100,4 +108,5 @@ ActiveRecord::Schema.define(version: 2021_02_12_163158) do
   add_foreign_key "music_instruments", "users"
   add_foreign_key "reviews", "music_instruments"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sub_categories", "music_categories"
 end

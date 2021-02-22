@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
 def authenticate_user!
   unless session[:user_id]
-    redirect_to users_path
+    redirect_to login_path
   end
 end
 

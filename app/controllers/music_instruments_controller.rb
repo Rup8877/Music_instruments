@@ -22,9 +22,13 @@ class MusicInstrumentsController < ApplicationController
   end
 
 def home
-  @music_instruments = MusicInstrument.all
+  if params[:category].blank?
+  @music_instruments = MusicInstrument.all.order("created_at DESC")
+else
+  @music_category_id = MusicCategory.find_by(category:params[:category])
+  @music_instruments=MusicInstrument.where( music_category_id: @music_category_id).order("created_at DESC")
 end
-
+end
 def buyer_posts
     @music_instruments = MusicInstrument.where(role:"buyer")
   end
@@ -46,6 +50,14 @@ def buyer_posts
  def posted_items
      @music_instruments = MusicInstrument.where(role:"buyer")
    end
+
+def filter_by_date
+  @music_instruments = MusicInstrument.where("created_at between (?) and (?)", params[:start_date], params[:end_date])
+end
+
+def filter_by_price
+  @music_instruments = MusicInstrument.where("price <= ? ", params[:price])
+end
 
    def required_items
      @music_instruments = MusicInstrument.where(role:"seller")
@@ -126,6 +138,6 @@ def buyer_posts
 
     # Only allow a list of trusted parameters through.
     def music_instrument_params
-      params.require(:music_instrument).permit(:item_tittle, :music_category_id, :item_description, :remove_image, :user_id, :phone_number, :price, :role, :approved_by, images:[])
+      params.require(:music_instrument).permit(:item_tittle, :music_category_id, :item_description,  :user_id, :phone_number, :price, :role, :approved_by, images:[])
     end
 end

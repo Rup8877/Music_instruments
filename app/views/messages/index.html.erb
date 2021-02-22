@@ -11,7 +11,7 @@
       <article class="message is-dark">
         <div class="message-body">
 
-          <div class="inline-block"><strong><%= user.name %></strong> <%= message.message_time %></div>
+          <div class="inline-block"><strong><%= user.name %></strong> <%= (message.created_at + 5.hours + 30.minutes).strftime("%d/%m/%y at %l:%M %p")%></div>
           <div class="block pt4">
             <div class="f4"><%= message.body %></div>
           </div>

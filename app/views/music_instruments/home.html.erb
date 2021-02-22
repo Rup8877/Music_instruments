@@ -1,34 +1,67 @@
+<div class="d-md-flex h-md-100 ">
+	<div class="col-md-3 p-2  h-md-100">
+			<h1>Filtration</h1>
+      <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Category</a>
+        <ul class="dropdown-menu" role="menu">
+        <% MusicCategory.all.each do |c| %>
+      <li>
+        <%= link_to c.category,root_path(category:c.category),class:"link"%>
+      </li>
+      <%end%>
+          </ul>
+      </li>
+      </ul>
 
-<div class="container-fluid">
-<div class="row">
-<% @music_instruments.each do |music_instrument| %>
-<% if music_instrument.approved_by == true%>
-<div class="col-md-4">
-    <div class="card">
-      <div class="mx-auto d-block">
-       <a href="<%=music_instrument_path(music_instrument.id)%>"</a>
-       <% if music_instrument.images.attached?%>
-     <%= image_tag(music_instrument.images.first, style: 'height:200px; width:100px;')%>
-  <%end%>
+     <h4>filter by price </h4>
+      <%= form_tag filter_by_price_path,method: :get do %>
+      <%= text_field_tag 'price',params[:price] , placeholder:"enter maximum price" %>
+      <%=submit_tag 'find'%>
+      <%end%>
+
+			<h4>filter by date </h4>
+			<%= form_tag filter_by_date_path,method: :get do %>
+			<%= text_field_tag 'start_date',params[:start_date] , placeholder:"enter start date" %>
+			<%= text_field_tag 'end_date',params[:end_date] , placeholder:"enter end date" %>
+			<%=submit_tag 'find'%>
+			<%end%>
+
+	</div>
+
+
+	<div class="col-md-9 p-2  h-md-100 ">
+   <div class="row">
+      <% @music_instruments.each do |music_instrument| %>
+      <% if music_instrument.approved_by == true%>
+      <div class="col-md-3">
+          <div class="card">
+            <div class="mx-auto d-block">
+             <a href="<%=music_instrument_path(music_instrument.id)%>"</a>
+             <% if music_instrument.images.attached?%>
+           <%= image_tag(music_instrument.images.first, style: 'height:200px; width:100px;')%>
+        <%end%>
+            </div>
+
+          <div class="px-4">
+         <span> Item tittle - <%= music_instrument.item_tittle %></span>
+         </div>
+
+         <div class="px-4">
+        <span> User -<td><%= music_instrument.user.name %></td></span>
+        </div>
+        <div class="px-4">
+        <span>Rs <%= music_instrument.price %></span>
+        </div>
+         <div class="px-2">
+        <%= link_to 'Interested', send_mail_path, class: "btn btn-primary btn-sm" %>
+        </div>
+
+          </div>
+        </div>
+        <% end%>
+        <% end %>
+      </div>
       </div>
 
-    <div class="px-4">
-   <span> Item tittle - <%= music_instrument.item_tittle %></span>
-   </div>
-
-   <div class="px-4">
-  <span> User -<td><%= music_instrument.user.name %></td></span>
-  </div>
-  <div class="px-4">
-  <span>Rs <%= music_instrument.price %></span>
-  </div>
-   <div class="px-2">
-  <%= link_to 'Interested', send_mail_path, class: "btn btn-primary btn-sm" %>
-  </div>
-
-    </div>
-  </div>
-  <% end%>
-  <% end %>
-</div>
 </div>

@@ -3,12 +3,13 @@
    <li class="nav-item active">
    <a class="nav-link" <%=link_to 'Music Instrument',root_path %></a>
       </li>
+
       <li class="nav-item active">
         <a class="nav-link" <%= link_to 'Create Post', new_music_instrument_path %></a>
       </li>
       <li class="nav-item active">
-        <%= form_tag search_music_instruments_path, method: :get, class: "navbar-form navbar-right", role: "search" do %>
-          <%= text_field_tag :search, params[:search], class: "form-control" %>
+        <%= form_tag search_music_instruments_path, method: :get do %>
+          <%= text_field_tag :search, params[:search]%>
            <%= submit_tag "search" %>
               <% end %>
               </li>
@@ -21,11 +22,11 @@
       </li>
       <li class="nav-item active">
         <% if current_user %>
-        <a class="nav-link" <%= link_to "Log out", "/log_out" %> </a>
+        <a class="nav-link" <%= link_to "Log out", "logout" %> </a>
       </li>
       <% else %>
       <li class="nav-item active">
-      <a class="nav-link"<%= link_to 'login' ,users_path %> </a>
+      <a class="nav-link"<%= link_to 'login' ,login_path %> </a>
      </li>
 
       <li class="nav-item">
@@ -38,6 +39,5 @@
             </li>
             <% end%>
 
-    </ul>
 
 </nav>

@@ -1,25 +1,37 @@
 Rails.application.routes.draw do
 
-  resources :users, only:[:index,:create]
-  resources :sessions, only: [:create]
-  get 'auth/:provider/callback' => 'sessions#google_create'
-  get "log_out" => "sessions#destroy"
+root to:'music_instruments#home'
+
+
+  get 'signup', to: 'users#new'
+  resources :users
+
+  get 'login', to: 'sessions#new'
+   post 'login', to: 'sessions#create'
+   get 'logout', to: 'sessions#destroy'
+  get 'auth/:provider/callback', to: 'sessions#google_create'
+
 
   resources :admin, only:[:index]
 
-  resources :music_categories, path: '/admin/music_categories'
-
-  root to:'music_instruments#home'
-
-  scope '/admin' do
-    get"/buyer_posts"  =>"music_instruments#buyer_posts"
-    get"/seller_posts"  =>"music_instruments#seller_posts"
+  resources :music_categories, path: '/admin/music_categories' do
+  resources :sub_categories
   end
+
+
+
 
   get"/posted_items"  =>"music_instruments#posted_items"
   get"/required_items"  =>"music_instruments#required_items"
+  get "/filter_by_price" => "music_instruments#filter_by_price"
+  get "/filter_by_date" => "music_instruments#filter_by_date"
+  get "/send_mail" => "music_instruments#send_mail"
 
   scope '/admin' do
+
+    get"/buyer_posts"  =>"music_instruments#buyer_posts"
+    get"/seller_posts"  =>"music_instruments#seller_posts"
+
   resources :music_instruments,only:[:approve,:reject] do
     member do
       patch:approve
@@ -28,7 +40,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/send_mail" => "music_instruments#send_mail"
+
 
   resources :music_instruments do
    resources:reviews
