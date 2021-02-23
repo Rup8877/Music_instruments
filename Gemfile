@@ -6,6 +6,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'devise'
+gem 'faker'
 gem 'hirb'
 gem 'jbuilder', '~> 2.7'
 gem 'mini_magick', '~> 4.8'
@@ -18,8 +19,14 @@ gem 'turbolinks', '~> 5'
 gem 'searchkick'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 4.0'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'shoulda-callback-matchers'
+  gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 gem 'better_errors'

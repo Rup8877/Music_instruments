@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/.freeze
-
+  VALID_NAME_REGEX = /\A[\sA-Za-z]*\z/i.freeze
 
     before_save { self.email = email.downcase }
 
@@ -11,9 +11,9 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
 
-  validates :password, presence: true, length: { minimum: 6, maximum: 20 }
-   validates :name, presence: true
-   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, length: { maximum: 30, minimum: 8 }
+  validates :password, presence: true, length: { maximun: 20, minimum: 6 }
+   validates :name, presence: true, format: { with: VALID_NAME_REGEX }, length: { maximum: 30, minimum: 2}
+   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, length: { maximum: 40, minimum: 8 }
 
 
   def self.find_or_create_from_auth_hash(auth)
