@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
 
-  validates :password, presence: true, length: { maximun: 20, minimum: 6 }
+   validates :password, presence: true, length: { maximun: 20, minimum: 6 }
    validates :name, presence: true, format: { with: VALID_NAME_REGEX }, length: { maximum: 30, minimum: 2}
    validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, length: { maximum: 40, minimum: 8 }
 

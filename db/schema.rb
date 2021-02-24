@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_193540) do
+ActiveRecord::Schema.define(version: 2021_02_24_075743) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2021_02_19_193540) do
     t.string "category", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category"], name: "index_music_categories_on_category", unique: true
   end
 
   create_table "music_instruments", force: :cascade do |t|
