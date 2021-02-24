@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   subject(:user) { FactoryBot.build(:user) }
 
   #validation_test
-  describe ".user_name_presence" do
+  describe "user name presence" do
     context "user name is present" do
       it "user having a name is valid" do
         expect(subject).to be_valid
@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".user_name_length" do
+  describe "user name length" do
       context "with valid user name length" do
         it "user having name of length within 2 and 35 characters is valid" do
           expect(subject).to be_valid

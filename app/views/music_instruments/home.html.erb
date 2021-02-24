@@ -20,13 +20,6 @@
       <%=submit_tag 'find'%>
       <%end%>
 
-			<h4>filter by date </h4>
-			<%= form_tag filter_by_date_path,method: :get do %>
-			<%= text_field_tag 'start_date',params[:start_date] , placeholder:"enter start date" %>
-			<%= text_field_tag 'end_date',params[:end_date] , placeholder:"enter end date" %>
-			<%=submit_tag 'find'%>
-			<%end%>
-
 	</div>
 
 
