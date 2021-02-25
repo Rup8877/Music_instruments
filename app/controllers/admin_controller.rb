@@ -1,11 +1,10 @@
+# frozen_string_literal: true
+
 class AdminController < ApplicationController
   before_action :ensure_admin_user!
-  def index
-  end
+  def index; end
 end
 
 def ensure_admin_user!
-  unless current_user and current_user.admin?
-    redirect_to root_path
-end
+  redirect_to root_path unless current_user&.admin?
 end
