@@ -8,7 +8,7 @@ class MusicCategoriesController < ApplicationController
   end
 
   def show
-    @sub_categories = SubCategory.where(music_category_id: @music_category.id).order('created_at DESC')
+
   end
 
   def new
