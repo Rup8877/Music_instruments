@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class MusicCategoriesControllerTest < ActionDispatch::IntegrationTest
@@ -5,17 +7,17 @@ class MusicCategoriesControllerTest < ActionDispatch::IntegrationTest
     @music_category = music_categories(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get music_categories_url
     assert_response :success
   end
 
-  test "should get new" do
+  test 'should get new' do
     get new_music_category_url
     assert_response :success
   end
 
-  test "should create music_category" do
+  test 'should create music_category' do
     assert_difference('MusicCategory.count') do
       post music_categories_url, params: { music_category: { category: @music_category.category } }
     end
@@ -23,22 +25,22 @@ class MusicCategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to music_category_url(MusicCategory.last)
   end
 
-  test "should show music_category" do
+  test 'should show music_category' do
     get music_category_url(@music_category)
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get edit_music_category_url(@music_category)
     assert_response :success
   end
 
-  test "should update music_category" do
+  test 'should update music_category' do
     patch music_category_url(@music_category), params: { music_category: { category: @music_category.category } }
     assert_redirected_to music_category_url(@music_category)
   end
 
-  test "should destroy music_category" do
+  test 'should destroy music_category' do
     assert_difference('MusicCategory.count', -1) do
       delete music_category_url(@music_category)
     end

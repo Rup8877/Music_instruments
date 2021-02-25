@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action:set_music_instrument
+  before_action :set_review, only: %i[show edit update destroy]
+  before_action :set_music_instrument
   # GET /reviews
   # GET /reviews.json
   def index
@@ -9,8 +11,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-  end
+  def show; end
 
   # GET /reviews/new
   def new
@@ -18,20 +19,18 @@ class ReviewsController < ApplicationController
   end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reviews
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-   @review.user_id=current_user.id
-   @review.music_instrument_id=@music_instrument.id
+    @review.user_id = current_user.id
+    @review.music_instrument_id = @music_instrument.id
     respond_to do |format|
       if @review.save
         format.html { redirect_to music_instrument_path(@music_instrument), notice: 'Review was successfully created.' }
 
-      
       end
     end
   end
@@ -61,17 +60,18 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:rating, :feedback)
-    end
-def set_music_instrument
-  @music_instrument=MusicInstrument.find(params[:music_instrument_id])
-end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
+  # Only allow a list of trusted parameters through.
+  def review_params
+    params.require(:review).permit(:rating, :feedback)
+  end
+
+  def set_music_instrument
+    @music_instrument = MusicInstrument.find(params[:music_instrument_id])
+  end
 end

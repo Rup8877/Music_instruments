@@ -1,16 +1,16 @@
 
 <div class="container">
-<div class="row">
+  <div class="row">
 
-  <div class="col-6">
-    <div class="container p-3 my-3 border">
-    <% (0...@music_instrument.images.count).each do |image| %>
-    <%= image_tag(@music_instrument.images[image] ,style: 'height:300px; width:200px;')%>
-    <%end%>
-    </div>
+    <div class="col-6">
+      <div class="container p-3 my-3 border">
+        <% (0...@music_instrument.images.count).each do |image| %>
+        <%= image_tag(@music_instrument.images[image] ,style: 'height:300px; width:200px;')%>
+        <%end%>
+      </div>
     </div>
 
-<div class="col-6">
+    <div class="col-6">
       <div class="card  p-5 m-5" style="width:600px">
         <div class="card-body">
           <h4 class="card-title"> <%= @music_instrument.item_tittle %></h4>
@@ -18,64 +18,64 @@
 
         </div>
       </div>
-</div>
+    </div>
 
-</div>
+  </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-6">
       <div class="card p-5 m-3" style= "width:600px">
-      <div class="body">
-        <p class="card-text"> <strong> Category - </strong> <%= @music_instrument.music_category.category%> </p>
-        <p class="card-text"> <strong> Description - </strong> <%= @music_instrument.item_description %> </p>
+        <div class="body">
+          <p class="card-text"> <strong> Category - </strong> <%= @music_instrument.music_category.category%> </p>
+          <p class="card-text"> <strong> Description - </strong> <%= @music_instrument.item_description %> </p>
         </div>
-        </div>
-        </div>
+      </div>
+    </div>
 
-       <div class="col-4">
-        <div class="card p-3 m-5" style="width:600px">
-          <div class="card-body">
-            <h5 class="card-title"><strong> <%= @music_instrument.role %> description </strong></h5>
-            <h4 class="card-title"> Name : <%= @music_instrument.user.name %></h4>
-            <p class="card-text"> <strong> Phone  - </strong> <%= @music_instrument.phone_number %> </p>
-            <% if @music_instrument.approved_by == true%>
-            <p>
-              <% if  current_user.id != @music_instrument.user_id %>
-                    <%= link_to "Chat", conversations_path(sender_id: current_user.id, recipient_id: @music_instrument.user.id), method: 'post', class:"btn btn-primary btn-lg" %>
-                  <% else current_user.id == @music_instrument.user_id  %>
-                    <%= link_to "Conversations", conversations_path , class:"btn btn-primary btn-lg" %>
-                  <% end%>
-            </p>
-          </div>
+    <div class="col-4">
+      <div class="card p-3 m-5" style="width:600px">
+        <div class="card-body">
+          <h5 class="card-title"><strong> <%= @music_instrument.role %> description </strong></h5>
+          <h4 class="card-title"> Name : <%= @music_instrument.user.name %></h4>
+          <p class="card-text"> <strong> Phone  - </strong> <%= @music_instrument.phone_number %> </p>
+          <% if @music_instrument.approved_by == true%>
+          <p>
+            <% if  current_user.id != @music_instrument.user_id %>
+            <%= link_to "Chat", conversations_path(sender_id: current_user.id, recipient_id: @music_instrument.user.id), method: 'post', class:"btn btn-primary btn-lg" %>
+            <% else current_user.id == @music_instrument.user_id  %>
+            <%= link_to "Conversations", conversations_path , class:"btn btn-primary btn-lg" %>
+            <% end%>
+          </p>
         </div>
-     </div>
+      </div>
+    </div>
 
-</div>
+  </div>
 </div>
 <div class="container p-3 my-3 border">
-<p>
-<strong> Avg review </strong> <%= @avg_review %> <br>
-</p>
-<p>
-<em><%= "#{@reviews.length} reviews" %></em>
-</p>
-<p>
-<tbody>
-<% @reviews.each do |review| %>
-<tr>
-  <td><%= review.rating %></td>
-  <td><%= review.feedback %></td>
-  </tr>
-  </tbody>
+  <p>
+    <strong> Avg review </strong> <%= @avg_review %> <br>
+  </p>
+  <p>
+    <em><%= "#{@reviews.length} reviews" %></em>
+  </p>
+  <p>
+    <tbody>
+      <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.rating %></td>
+        <td><%= review.feedback %></td>
+      </tr>
+    </tbody>
+    <%end%>
+  </p>
+  <%=render 'reviews/form'%>
   <%end%>
-</p>
-<%=render 'reviews/form'%>
-<%end%>
 
-<% if @music_instrument.approved_by == false%>
-<%= link_to 'Edit', edit_music_instrument_path(@music_instrument) %>
-<%= link_to 'Back', music_instruments_path %>
-<%end%>
+  <% if @music_instrument.approved_by == false%>
+  <%= link_to 'Edit', edit_music_instrument_path(@music_instrument) %>
+  <%= link_to 'Back', music_instruments_path %>
+  <%end%>
 </div>

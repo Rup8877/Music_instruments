@@ -1,29 +1,27 @@
 <% unless @music_instruments.nil? %>
 
-    <div class="container-fluid">
-    <div class="row">
+<div class="container-fluid">
+  <div class="row">
     <% @music_instruments.each do |music_instrument| %>
     <div class="col-md-4">
-        <div class="card">
-          <div class="mx-auto d-block">
-            <a href="<%=music_instrument_path(music_instrument.id)%>"</a>
+      <div class="card">
+        <div class="mx-auto d-block">
+          <a href="<%=music_instrument_path(music_instrument.id)%>"</a>
           <%= image_tag(music_instrument.images.first)if music_instrument.images.attached?%>
-          </div>
-          <div class="px-4">
-        <span>Rs <%= music_instrument.price %></span>
         </div>
         <div class="px-4">
-       <span> Item tittle - <%= music_instrument.item_tittle %>, User -<td><%= music_instrument.user.name %></td></span>
-       </div>
+          <span>Rs <%= music_instrument.price %></span>
+        </div>
+        <div class="px-4">
+          <span> Item tittle - <%= music_instrument.item_tittle %>, User -<td><%= music_instrument.user.name %></td></span>
         </div>
       </div>
-
-      <% end%>
-
-    </div>
     </div>
 
-  <%end%>
+    <% end%>
 
+  </div>
+</div>
 
+<%end%>
 <%= link_to "Back", root_path%>

@@ -1,21 +1,21 @@
+# frozen_string_literal: true
+
 class MusicCategoriesController < ApplicationController
-  before_action :set_music_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_music_category, only: %i[show edit update destroy]
 
   def index
     @music_categories = MusicCategory.all
   end
 
   def show
-      @sub_categories=SubCategory.where(music_category_id: @music_category.id).order("created_at DESC")
+    @sub_categories = SubCategory.where(music_category_id: @music_category.id).order('created_at DESC')
   end
 
   def new
     @music_category = MusicCategory.new
   end
 
-  def edit
-  end
-
+  def edit; end
 
   def create
     @music_category = MusicCategory.new(music_category_params)
@@ -43,7 +43,6 @@ class MusicCategoriesController < ApplicationController
     end
   end
 
-
   def destroy
     @music_category.destroy
     respond_to do |format|
@@ -54,12 +53,11 @@ class MusicCategoriesController < ApplicationController
 
   private
 
-    def set_music_category
-      @music_category = MusicCategory.find(params[:id])
-    end
+  def set_music_category
+    @music_category = MusicCategory.find(params[:id])
+  end
 
-
-    def music_category_params
-      params.require(:music_category).permit(:category)
-    end
+  def music_category_params
+    params.require(:music_category).permit(:category)
+  end
 end

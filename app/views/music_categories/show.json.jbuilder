@@ -1,1 +1,3 @@
-json.partial! "music_categories/music_category", music_category: @music_category
+# frozen_string_literal: true
+
+json.partial! 'music_categories/music_category', music_category: @music_category
