@@ -25,3 +25,4 @@ Project Details - It is an online market place where the users can show their it
    *rails s  // for starting the rails server
    
    *sudo systemctl start elasticsearch.service   // for Elasticsearch
+ 
