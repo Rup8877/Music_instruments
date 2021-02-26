@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'music_instruments#home'
 
   get 'signup', to: 'users#new'
-  resources :users
+  resources :users , only:[:create]
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
