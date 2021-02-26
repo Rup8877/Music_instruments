@@ -18,6 +18,17 @@
           1,
           1,
           1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          16,
+          0,
+          0,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -100,7 +111,6 @@
           null,
           1,
           1,
-          1,
           null,
           1,
           null
@@ -119,17 +129,8 @@
           null,
           null
         ]
-      },
-      "/home/rupesh/ac4/app/models/sub_category.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1614232345
+    "timestamp": 1614290656
   }
 }

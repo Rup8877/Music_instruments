@@ -13,4 +13,15 @@ class MusicInstrument < ApplicationRecord
   validates :item_description, presence: true, length: { maximum: 5000, minimum: 10 }
   validates :phone_number, presence: true, numericality: true, length: { is: 10 }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  validate :image_type
+
+  private
+
+  def image_type
+     images.each do |image|
+      if !image.content_type.in?(%('image/jpeg image/jpg image/png'))
+        errors.add(:images,'needs to be a JPEG or JPG or PNG' )
+      end
+    end
+  end
 end

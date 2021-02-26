@@ -86,7 +86,7 @@ if @reviews.blank?
 
     respond_to do |format|
       if @music_instrument.save
-        format.html { redirect_to @music_instrument, notice: 'Music instrument was successfully created.' }
+        format.html { redirect_to @music_instrument }
         format.json { render :show, status: :created, location: @music_instrument }
       else
         format.html { render :new }
@@ -100,7 +100,7 @@ if @reviews.blank?
   def update
     respond_to do |format|
       if @music_instrument.update(music_instrument_params)
-        format.html { redirect_to @music_instrument, notice: 'Music instrument was successfully updated.' }
+        format.html { redirect_to @music_instrument }
         format.json { render :show, status: :ok, location: @music_instrument }
       else
         format.html { render :edit }
@@ -114,7 +114,7 @@ if @reviews.blank?
   def destroy
     @music_instrument.destroy
     respond_to do |format|
-      format.html { redirect_to music_instruments_url, notice: 'Music instrument was successfully destroyed.' }
+      format.html { redirect_to music_instruments_url, notice: 'Music instrument  destroyed.' }
       format.json { head :no_content }
     end
   end
