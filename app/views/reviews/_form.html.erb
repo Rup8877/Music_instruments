@@ -1,17 +1,37 @@
 <%= form_for [@music_instrument, Review.new] do |form| %>
 
 
-  <div class="field">
+<div class="col-8 mx-auto">
+<div class="card ">
+  <div class="card-header text-center">
+    <h3>Review </h3>
+    </div>
+
+<div class="card-body text-center p-5">
+
+  <div class="form-group row">
     <%= form.label :rating %>
-    <%= form.number_field :rating %>
+    <div class="col-6">
+    <%= form.number_field :rating, placeholder:"Rate between 1 to 5", class:"form-control", required:true %>
   </div>
+</div>
 
-  <div class="field">
+
+  <div class="form-group row">
     <%= form.label :feedback %>
-    <%= form.text_area :feedback %>
+    <div class="col-6">
+    <%= form.text_area :feedback, placeholder:"write feedback", class:"form-control", required:true%>
+  </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit "Add Review"%>
+<div class="form-group row">
+  <div class="col-4">
+    <strong><%= form.submit( "Add Review",{ class: "btn btn-success btn-md btn-block my-2 my-sm-0" })%></strong>
   </div>
+</div>
+
+
+</div>
+</div>
+</div>
 <% end %>

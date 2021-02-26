@@ -14,10 +14,10 @@ class MusicInstrumentsController < ApplicationController
   def show
     @reviews = Review.where(music_instrument_id: @music_instrument.id).order('created_at DESC')
 
-if @reviews.blank?
+    if @reviews.blank?
     @avg_review = 0
       else
-        @reviews.average(:rating).round(2)
+    @avg_review = @reviews.average(:rating).round(2)
         end
     @conversation = Conversation.where(music_instrument_id: @music_instrument.id)
   end

@@ -1,65 +1,90 @@
 <%= form_with(model: music_instrument, local: true) do |form| %>
 
-
 <%= render "layouts/errors", obj: music_instrument %>
 
-<div class="field">
+<div class="col-8 mx-auto">
+<div class="card">
+  <div class="card-header text-center">
+    <h3>New Music Instrument </h3>
+    </div>
+
+<div class="card-body text-center p-5">
+
+<div class="form-group row">
   <%= form.label :item_tittle %>
-  <%= form.text_field :item_tittle ,placeholder:"Enter tittle", required:true %>
+  <div class="col-6">
+  <%= form.text_field :item_tittle ,placeholder:"Enter tittle", class:"form-control", required:true %>
+</div>
 </div>
 
-
-<div class="field">
+<div class="form-group row">
   <%= form.label :music_category,"Music Category:", for: "music_category"  %>
+  <div class="col-6 form-control">
   <%= form.select(:music_category_id) do %>
   <% MusicCategory.all.each do |c| %>
-  <%= content_tag(:option, c.category, value: c.id) %>
+  <%= content_tag(:option, c.category, value: c.id)%>
   <% end %>
   <% end %>
 </div>
+</div>
 
 
-
-<div class="field">
+<div class="form-group row">
   <%= form.label :item_description %>
-  <%= form.text_area :item_description ,placeholder:"Write description ", required:true %>
+  <div class="col-6 ">
+  <%= form.text_area :item_description ,placeholder:" Write description ", class:"form-control", required:true %>
+</div>
 </div>
 
-<div class="field">
-  <%= form.hidden_field :user_id, value: current_user.id%>
+<div class="form-group">
+  <%= form.hidden_field :user_id, value: current_user.id %>
 </div>
 
-
-
-<div class="field">
+<div class="form-group row">
   <%= form.label :phone_number %>
-  <%= form.number_field :phone_number ,placeholder:"Enter phone number",required:true%>
+  <div class="col-6">
+  <%= form.number_field :phone_number ,placeholder:"Enter phone number", class:"form-control", required:true%>
+</div>
 </div>
 
-<div class="field">
+<div class="form-group row">
   <%= form.label :price %>
-  <%= form.number_field :price,placeholder:"Enter price",required:true %>
+  <div class="col-6">
+  <%= form.number_field :price,placeholder:"Enter price", class:"form-control", required:true %>
+</div>
 </div>
 
-
-
-
-<div class="field">
+<div class="form-group row">
   <%=form.label :image %>
-  <%=form.file_field :images , multiple:true ,required:true%>
+  <div class="col-6">
+  <%=form.file_field :images , multiple:true, class:"form-control", required:true %>
+</div>
 </div>
 
 
-
-<span>Users role</span>
-<div class="field">
+<div class="form-group row">
+  <%=form.label :Users_role %>
+<div class="col-6 form-control">
   <%= form.radio_button :role, "buyer" %>
   <%= form.label :role_buyer, "Buyer" %>
   <%= form.radio_button :role, "seller" %>
   <%= form.label :role_seller, "Seller" %>
 </div>
-
-<div class="actions">
-  <%= form.submit %>
 </div>
+
+</div>
+</div>
+</div>
+
+<div class="row justify-content-center my-4">
+  <div class="col-2">
+    <strong><%= link_to "Back", root_path, class: "btn btn-secondary btn-md btn-block my-2 my-sm-0" %></strong>
+  </div>
+  <div class="col-2">
+    <strong><%= form.submit( "Add MusicInstrument",{ class: "btn btn-success btn-md btn-block my-2 my-sm-0" })%></strong>
+  </div>
+</div>
+
+
+
 <% end %>

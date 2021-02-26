@@ -55,23 +55,32 @@
   </div>
 </div>
 <div class="container p-3 my-3 border">
+
+<%=render 'reviews/form'%>
+
+<div class="card">
+
   <p>
-    <strong> Avg review </strong> <%= @avg_review %> <br>
+    <strong> Avg review = </strong> <%= @avg_review %> <br>
   </p>
   <p>
-    <em><%= "#{@reviews.length} reviews" %></em>
+    <strong><%= " Total numnber of reviews = #{@reviews.length} " %></strong>
   </p>
   <p>
     <tbody>
       <% @reviews.each do |review| %>
       <tr>
-        <td><%= review.rating %></td>
-        <td><%= review.feedback %></td>
+        <td>Rating : <%= review.rating %></td><br>
+        <td>Feedback : <%= review.feedback %></td>
       </tr>
+      <br>
+      <br>
     </tbody>
     <%end%>
   </p>
-  <%=render 'reviews/form'%>
+
+</div>
+
   <%end%>
 
   <% if @music_instrument.approved_by == false%>
