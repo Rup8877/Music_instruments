@@ -86,7 +86,7 @@ if @reviews.blank?
 
     respond_to do |format|
       if @music_instrument.save
-        format.html { redirect_to @music_instrument }
+        format.html { redirect_to @music_instrument, notice: 'music instrument created'}
         format.json { render :show, status: :created, location: @music_instrument }
       else
         format.html { render :new }
@@ -100,7 +100,7 @@ if @reviews.blank?
   def update
     respond_to do |format|
       if @music_instrument.update(music_instrument_params)
-        format.html { redirect_to @music_instrument }
+        format.html { redirect_to @music_instrument, notice: 'music instrument updated' }
         format.json { render :show, status: :ok, location: @music_instrument }
       else
         format.html { render :edit }
