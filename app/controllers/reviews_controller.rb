@@ -27,37 +27,13 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     @review.music_instrument_id = @music_instrument.id
-    respond_to do |format|
       if @review.save
-        format.html { redirect_to music_instrument_path(@music_instrument), notice: 'Review was successfully created.' }
-
+      redirect_to music_instrument_path(@music_instrument)
+    else
+      flash[:notice] = ' Invalid Rating or Feedback '
+      redirect_to music_instrument_path(@music_instrument)
       end
     end
-  end
-
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
-  def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
-  def destroy
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
 
