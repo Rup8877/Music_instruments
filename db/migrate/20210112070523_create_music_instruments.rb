@@ -5,7 +5,6 @@ class CreateMusicInstruments < ActiveRecord::Migration[6.0]
     create_table :music_instruments do |t|
       t.string :item_tittle
       t.text :item_description
-      t.string :user_name
       t.integer :phone_number
       t.integer :price
 

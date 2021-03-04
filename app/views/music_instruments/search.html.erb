@@ -3,11 +3,12 @@
 <div class="container-fluid">
   <div class="row">
     <% @music_instruments.each do |music_instrument| %>
+    <% if music_instrument.approved_by == true %>
     <div class="col-md-4">
       <div class="card">
         <div class="mx-auto d-block">
-          <a href="<%=music_instrument_path(music_instrument.id)%>"</a>
-          <%= image_tag(music_instrument.images.first)if music_instrument.images.attached?%>
+          <a href="<%= music_instrument_path(music_instrument.id) %>"</a>
+          <%= image_tag(music_instrument.images.first)if music_instrument.images.attached? %>
         </div>
         <div class="px-4">
           <span>Rs <%= music_instrument.price %></span>
@@ -22,6 +23,6 @@
 
   </div>
 </div>
-
+<%end%>
 <%end%>
 <%= link_to "Back", root_path%>

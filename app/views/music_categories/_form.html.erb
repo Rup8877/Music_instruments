@@ -1,22 +1,29 @@
 <%= form_with(model: music_category, local: true) do |form| %>
-  <% if music_category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(music_category.errors.count, "error") %> prohibited this music_category from being saved:</h2>
 
-      <ul>
-        <% music_category.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= render "layouts/errors", obj: music_category %>
+
+<div class="col-8 mx-auto">
+<div class="card">
+  <div class="card-header text-center">
+    <h3>New Music Category </h3>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.text_field :category %>
-  </div>
+<div class="card-body text-center p-5">
 
-  <div class="actions">
-    <%= form.submit %>
+<div class="form-group row">
+  <div class="col-3">
+  <%= form.label :category %>
   </div>
-<% end %>
+  <div class="col-6">
+  <%= form.text_field :category ,placeholder:"Enter category", class:"form-control", required:true %>
+</div>
+</div>
+</div>
+
+<div class="row justify-content-center my-4">
+<div class="col-2">
+  <strong><%= form.submit( "Add Category",{ class: "btn btn-success btn-md btn-block my-2 my-sm-0" })%></strong>
+</div>
+</div>
+</div>
+<%end%>

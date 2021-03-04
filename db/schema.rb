@@ -51,14 +51,12 @@ ActiveRecord::Schema.define(version: 2021_02_25_124656) do
   end
 
   create_table "music_categories", force: :cascade do |t|
-    t.string "category"
+    t.string "category", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category"], name: "index_music_categories_on_category", unique: true
   end
 
   create_table "music_instruments", force: :cascade do |t|
-    t.string "user_name"
     t.integer "music_category_id", null: false
     t.integer "user_id", null: false
     t.string "item_tittle", null: false
@@ -84,23 +82,15 @@ ActiveRecord::Schema.define(version: 2021_02_25_124656) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "sub_categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "music_category_id", null: false
-    t.index ["music_category_id"], name: "index_sub_categories_on_music_category_id"
-  end
-
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "password_digest"
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin", default: false
     t.string "provider"
     t.string "uid"
-    t.string "name"
+    t.string "name", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -111,5 +101,4 @@ ActiveRecord::Schema.define(version: 2021_02_25_124656) do
   add_foreign_key "music_instruments", "users"
   add_foreign_key "reviews", "music_instruments"
   add_foreign_key "reviews", "users"
-  add_foreign_key "sub_categories", "music_categories"
 end

@@ -22,7 +22,7 @@ class MusicCategoriesController < ApplicationController
 
     respond_to do |format|
       if @music_category.save
-        format.html { redirect_to @music_category, notice: 'Music category was successfully created.' }
+        format.html { redirect_to @music_category}
         format.json { render :show, status: :created, location: @music_category }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class MusicCategoriesController < ApplicationController
   def destroy
     @music_category.destroy
     respond_to do |format|
-      format.html { redirect_to music_categories_url, notice: 'Music category was successfully destroyed.' }
+      format.html { redirect_to music_categories_url }
       format.json { head :no_content }
     end
   end

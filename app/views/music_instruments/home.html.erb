@@ -7,7 +7,7 @@
 				<ul class="dropdown-menu" role="menu">
 					<% MusicCategory.all.each do |c| %>
 					<li>
-						<%= link_to c.category,root_path(category:c.category),class:"link"%>
+						<%= link_to c.category,root_path(category:c.category),class:"link" %>
 					</li>
 					<%end%>
 				</ul>
@@ -26,13 +26,13 @@
 	<div class="col-md-9 p-2  h-md-100 ">
 		<div class="row">
 			<% @music_instruments.each do |music_instrument| %>
-			<% if music_instrument.approved_by == true%>
+			<% if music_instrument.approved_by == true %>
 			<div class="col-md-3">
 				<div class="card">
 					<div class="mx-auto d-block">
-						<a href="<%=music_instrument_path(music_instrument.id)%>"</a>
+						<a href="<%= music_instrument_path(music_instrument.id) %>"</a>
 						<% if music_instrument.images.attached?%>
-						<%= image_tag(music_instrument.images.first, style: 'height:200px; width:100px;')%>
+						<%= image_tag(music_instrument.images.first, style: 'height:200px; width:100px;') %>
 						<%end%>
 					</div>
 
