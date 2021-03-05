@@ -15,3 +15,52 @@ User.create(name: "rahul", email: "rahul@gmail.com", password: "123456")
 
 MusicCategory.create(category: "Tabla")
 MusicCategory.create(category: "Drum")
+MusicCategory.create(category: "Guitar")
+MusicCategory.create(category: "Keyboard")
+
+
+music_instrument = MusicInstrument.new
+music_instrument.user_id = User.first.id
+music_instrument.music_category_id = MusicCategory.first.id
+music_instrument.item_tittle = 'tabla'
+music_instrument.item_description = 'A tabla is a pair of twin hand drums from the Indian subcontinent.'
+music_instrument.phone_number = 9645879523
+music_instrument.price = 500
+music_instrument.role = 'buyer'
+music_instrument.approved_by  = true
+music_instrument.images.attach(io: File.open(Rails.root.join('app/assets/images/tabla.jpeg')),filename: 'tabla.jpeg')
+music_instrument.save!
+
+music_instrument = MusicInstrument.new
+music_instrument.user_id = User.second.id
+music_instrument.music_category_id = MusicCategory.second.id
+music_instrument.item_tittle = 'drum'
+music_instrument.item_description = 'The drum is a member of the percussion group of musical instruments.'
+music_instrument.phone_number = 9589665563
+music_instrument.price = 400
+music_instrument.role = 'seller'
+music_instrument.approved_by  = true
+music_instrument.images.attach(io: File.open(Rails.root.join('app/assets/images/drum.jpeg')),filename: 'drum.jpeg')
+music_instrument.save!
+
+music_instrument = MusicInstrument.new
+music_instrument.user_id = User.third.id
+music_instrument.music_category_id = MusicCategory.third.id
+music_instrument.item_tittle = 'guitar'
+music_instrument.item_description = 'The guitar is a fretted musical instrument that typically has six strings.'
+music_instrument.phone_number = 9645879598
+music_instrument.price = 300
+music_instrument.role = 'buyer'
+music_instrument.images.attach(io: File.open(Rails.root.join('app/assets/images/guitar.jpeg')),filename: 'guitar.jpeg')
+music_instrument.save!
+
+music_instrument = MusicInstrument.new
+music_instrument.user_id = User.fourth.id
+music_instrument.music_category_id = MusicCategory.fourth.id
+music_instrument.item_tittle = 'keyboard'
+music_instrument.item_description = 'good for using'
+music_instrument.phone_number = 9645879958
+music_instrument.price = 700
+music_instrument.role = 'seller'
+music_instrument.images.attach(io: File.open(Rails.root.join('app/assets/images/keyboard.jpeg')),filename: 'keyboard.jpeg')
+music_instrument.save!

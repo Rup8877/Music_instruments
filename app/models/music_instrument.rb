@@ -11,7 +11,7 @@ class MusicInstrument < ApplicationRecord
 
   validates :item_tittle, presence: true, length: { maximum: 50, minimum: 2 }
   validates :item_description, presence: true, length: { maximum: 5000, minimum: 10 }
-  validates :phone_number, presence: true, numericality: true, length: { is: 10 }
+  validates :phone_number, presence: true, numericality: true, length: { is: 10 }, uniqueness: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validate :image_type
 

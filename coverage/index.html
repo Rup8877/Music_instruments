@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-02-26T03:34:17+05:30">2021-02-26T03:34:17+05:30</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-03-05T18:41:57+05:30">2021-03-05T18:41:57+05:30</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -139,7 +139,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#8cad21e2cd3b18f09f8c03dc4f12ec3be93b650c" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">30</td>
+            <td class="cell--number">31</td>
             <td class="cell--number">19</td>
             <td class="cell--number">19</td>
             <td class="cell--number">0</td>
@@ -391,7 +391,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#8cad21e2cd3b18f09f8c03dc4f12ec3be93b650c" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">30</td>
+            <td class="cell--number">31</td>
             <td class="cell--number">19</td>
             <td class="cell--number">19</td>
             <td class="cell--number">0</td>
@@ -1125,7 +1125,7 @@
 
             
 
-            <code class="ruby">  validates :category, presence: true, length: { minimum: 2, maximum: 50 }</code>
+            <code class="ruby">  validates :category, presence: true, length: { minimum: 2, maximum: 50 }, uniqueness: true</code>
           </li>
         </div>
       
@@ -1321,7 +1321,7 @@
 
             
 
-            <code class="ruby">  validates :phone_number, presence: true, numericality: true, length: { is: 10 }</code>
+            <code class="ruby">  validates :phone_number, presence: true, numericality: true, length: { is: 10 }, uniqueness: true</code>
           </li>
         </div>
       
@@ -1817,29 +1817,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="17">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false },</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="18">
-            
-            
-
-            
-
-            <code class="ruby">                    length: { maximum: 40, minimum: 8 }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
+          <li class="never" data-hits="" data-linenumber="17">
             
             
 
@@ -1850,13 +1828,35 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="20">
+          <li class="covered" data-hits="1" data-linenumber="18">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def self.find_or_create_from_auth_hash(auth)</code>
+            <code class="ruby">  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false },</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">                    length: { maximum: 40, minimum: 8 }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="20">
+            
+            
+
+            
+
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -1867,7 +1867,7 @@
 
             
 
-            <code class="ruby">    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|</code>
+            <code class="ruby">  def self.find_or_create_from_auth_hash(auth)</code>
           </li>
         </div>
       
@@ -1878,7 +1878,7 @@
 
             
 
-            <code class="ruby">      user.provider = auth.provider</code>
+            <code class="ruby">    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|</code>
           </li>
         </div>
       
@@ -1889,7 +1889,7 @@
 
             
 
-            <code class="ruby">      user.uid = auth.uid</code>
+            <code class="ruby">      user.provider = auth.provider</code>
           </li>
         </div>
       
@@ -1900,7 +1900,7 @@
 
             
 
-            <code class="ruby">      user.name = auth.info.name</code>
+            <code class="ruby">      user.uid = auth.uid</code>
           </li>
         </div>
       
@@ -1911,7 +1911,7 @@
 
             
 
-            <code class="ruby">      user.email = auth.info.email</code>
+            <code class="ruby">      user.name = auth.info.name</code>
           </li>
         </div>
       
@@ -1922,7 +1922,7 @@
 
             
 
-            <code class="ruby">      user.password = &#39;123456&#39;</code>
+            <code class="ruby">      user.email = auth.info.email</code>
           </li>
         </div>
       
@@ -1933,18 +1933,18 @@
 
             
 
-            <code class="ruby">      user.save!</code>
+            <code class="ruby">      user.password = &#39;123456&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="28">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="28">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      user.save!</code>
           </li>
         </div>
       
@@ -1955,12 +1955,23 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
           <li class="never" data-hits="" data-linenumber="30">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="31">
             
             
 

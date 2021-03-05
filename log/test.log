@@ -5980,3 +5980,407 @@ FOREIGN KEY ("user_id")
   [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "name" = ?, "email" = ?, "password_digest" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["name", "Aman Singh"], ["email", "student@gmail.com"], ["password_digest", "$2a$04$u2uFv3/Fs3Sz43IRQ01QduHQQiucMt5Jh.AWKy6d95WK.sYOt0uV."], ["updated_at", "2021-02-25 22:04:16.784441"], ["id", 1]]
   [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments"[0m
+  [1m[35m (149.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime NOT NULL)[0m
+  [1m[35m (94.9ms)[0m  [1m[35mCREATE  INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (121.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs"[0m
+  [1m[35m (96.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "byte_size" bigint NOT NULL, "checksum" varchar NOT NULL, "created_at" datetime NOT NULL)[0m
+  [1m[35m (103.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "conversations"[0m
+  [1m[35m (108.6ms)[0m  [1m[35mCREATE TABLE "conversations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "sender_id" integer, "recipient_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "messages"[0m
+  [1m[35m (113.9ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "conversation_id" integer NOT NULL, "user_id" integer NOT NULL, "body" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (136.1ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_conversation_id" ON "messages" ("conversation_id")[0m
+  [1m[35m (130.2ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "music_categories"[0m
+  [1m[35m (113.3ms)[0m  [1m[35mCREATE TABLE "music_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "category" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE IF EXISTS "music_instruments"[0m
+  [1m[35m (120.7ms)[0m  [1m[35mCREATE TABLE "music_instruments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "music_category_id" integer NOT NULL, "user_id" integer NOT NULL, "item_tittle" varchar NOT NULL, "item_description" text NOT NULL, "phone_number" integer NOT NULL, "price" integer NOT NULL, "role" varchar NOT NULL, "approved_by" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (142.5ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_music_category_id" ON "music_instruments" ("music_category_id")[0m
+  [1m[35m (102.3ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_user_id" ON "music_instruments" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE IF EXISTS "reviews"[0m
+  [1m[35m (124.2ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "music_instrument_id" integer NOT NULL, "user_id" integer NOT NULL, "rating" integer NOT NULL, "feedback" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (129.9ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_music_instrument_id" ON "reviews" ("music_instrument_id")[0m
+  [1m[35m (122.5ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_user_id" ON "reviews" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (109.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "admin" boolean DEFAULT 0, "provider" varchar, "uid" varchar, "name" varchar NOT NULL)[0m
+  [1m[35m (86.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (7.8ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_attachments" ("id" integer NOT NULL PRIMARY KEY, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_attachments_uniqueness" ON "aactive_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "tindex_aactive_storage_attachments_on_blob_id" ON "aactive_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "aactive_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "active_storage_attachments"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "active_storage_attachments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer NOT NULL PRIMARY KEY, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "blob_id" integer NOT NULL, "created_at" datetime NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE  INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "aactive_storage_attachments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "aactive_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (192.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amessages" ("id" integer NOT NULL PRIMARY KEY, "conversation_id" integer NOT NULL, "user_id" integer NOT NULL, "body" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "tindex_amessages_on_user_id" ON "amessages" ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX "tindex_amessages_on_conversation_id" ON "amessages" ("conversation_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[32mINSERT INTO "amessages" ("id","conversation_id","user_id","body","created_at","updated_at")
+                     SELECT "id","conversation_id","user_id","body","created_at","updated_at" FROM "messages"[0m
+  [1m[35m (3.4ms)[0m  [1m[35mDROP TABLE "messages"[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer NOT NULL PRIMARY KEY, "conversation_id" integer NOT NULL, "user_id" integer NOT NULL, "body" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_7f927086d2"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "conversations" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_conversation_id" ON "messages" ("conversation_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "messages" ("id","conversation_id","user_id","body","created_at","updated_at")
+                     SELECT "id","conversation_id","user_id","body","created_at","updated_at" FROM "amessages"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "amessages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (1354.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.5ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.5ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amessages" ("id" integer NOT NULL PRIMARY KEY, "conversation_id" integer NOT NULL, "user_id" integer NOT NULL, "body" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "tindex_amessages_on_user_id" ON "amessages" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "tindex_amessages_on_conversation_id" ON "amessages" ("conversation_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "amessages" ("id","conversation_id","user_id","body","created_at","updated_at")
+                     SELECT "id","conversation_id","user_id","body","created_at","updated_at" FROM "messages"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "messages"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "messages" ("id" integer NOT NULL PRIMARY KEY, "conversation_id" integer NOT NULL, "user_id" integer NOT NULL, "body" text NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, CONSTRAINT "fk_rails_7f927086d2"
+FOREIGN KEY ("conversation_id")
+  REFERENCES "conversations" ("id")
+, CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_conversation_id" ON "messages" ("conversation_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_messages_on_user_id" ON "messages" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "messages" ("id","conversation_id","user_id","body","created_at","updated_at")
+                     SELECT "id","conversation_id","user_id","body","created_at","updated_at" FROM "amessages"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "amessages"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (86.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amusic_instruments" ("id" integer NOT NULL PRIMARY KEY, "music_category_id" integer NOT NULL, "user_id" integer NOT NULL, "item_tittle" varchar NOT NULL, "item_description" text NOT NULL, "phone_number" integer NOT NULL, "price" integer NOT NULL, "role" varchar NOT NULL, "approved_by" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "tindex_amusic_instruments_on_user_id" ON "amusic_instruments" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "tindex_amusic_instruments_on_music_category_id" ON "amusic_instruments" ("music_category_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "amusic_instruments" ("id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at")
+                     SELECT "id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at" FROM "music_instruments"[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE "music_instruments"[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "music_instruments" ("id" integer NOT NULL PRIMARY KEY, "music_category_id" integer NOT NULL, "user_id" integer NOT NULL, "item_tittle" varchar NOT NULL, "item_description" text NOT NULL, "phone_number" integer NOT NULL, "price" integer NOT NULL, "role" varchar NOT NULL, "approved_by" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_73062bf54a"
+FOREIGN KEY ("music_category_id")
+  REFERENCES "music_categories" ("id")
+)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_music_category_id" ON "music_instruments" ("music_category_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_user_id" ON "music_instruments" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "music_instruments" ("id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at")
+                     SELECT "id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at" FROM "amusic_instruments"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE "amusic_instruments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (110.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "amusic_instruments" ("id" integer NOT NULL PRIMARY KEY, "music_category_id" integer NOT NULL, "user_id" integer NOT NULL, "item_tittle" varchar NOT NULL, "item_description" text NOT NULL, "phone_number" integer NOT NULL, "price" integer NOT NULL, "role" varchar NOT NULL, "approved_by" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX "tindex_amusic_instruments_on_user_id" ON "amusic_instruments" ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "tindex_amusic_instruments_on_music_category_id" ON "amusic_instruments" ("music_category_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "amusic_instruments" ("id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at")
+                     SELECT "id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at" FROM "music_instruments"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE "music_instruments"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "music_instruments" ("id" integer NOT NULL PRIMARY KEY, "music_category_id" integer NOT NULL, "user_id" integer NOT NULL, "item_tittle" varchar NOT NULL, "item_description" text NOT NULL, "phone_number" integer NOT NULL, "price" integer NOT NULL, "role" varchar NOT NULL, "approved_by" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_73062bf54a"
+FOREIGN KEY ("music_category_id")
+  REFERENCES "music_categories" ("id")
+, CONSTRAINT "fk_rails_6a71573fda"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_music_category_id" ON "music_instruments" ("music_category_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_music_instruments_on_user_id" ON "music_instruments" ("user_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "music_instruments" ("id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at")
+                     SELECT "id","music_category_id","user_id","item_tittle","item_description","phone_number","price","role","approved_by","created_at","updated_at" FROM "amusic_instruments"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "amusic_instruments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (82.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TEMPORARY TABLE "areviews" ("id" integer NOT NULL PRIMARY KEY, "music_instrument_id" integer NOT NULL, "user_id" integer NOT NULL, "rating" integer NOT NULL, "feedback" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX "tindex_areviews_on_user_id" ON "areviews" ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "tindex_areviews_on_music_instrument_id" ON "areviews" ("music_instrument_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "areviews" ("id","music_instrument_id","user_id","rating","feedback","created_at","updated_at")
+                     SELECT "id","music_instrument_id","user_id","rating","feedback","created_at","updated_at" FROM "reviews"[0m
+  [1m[35m (3.0ms)[0m  [1m[35mDROP TABLE "reviews"[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" integer NOT NULL PRIMARY KEY, "music_instrument_id" integer NOT NULL, "user_id" integer NOT NULL, "rating" integer NOT NULL, "feedback" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4a6c0cd0c0"
+FOREIGN KEY ("music_instrument_id")
+  REFERENCES "music_instruments" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_music_instrument_id" ON "reviews" ("music_instrument_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_user_id" ON "reviews" ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "reviews" ("id","music_instrument_id","user_id","rating","feedback","created_at","updated_at")
+                     SELECT "id","music_instrument_id","user_id","rating","feedback","created_at","updated_at" FROM "areviews"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "areviews"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (94.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "areviews" ("id" integer NOT NULL PRIMARY KEY, "music_instrument_id" integer NOT NULL, "user_id" integer NOT NULL, "rating" integer NOT NULL, "feedback" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "tindex_areviews_on_user_id" ON "areviews" ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX "tindex_areviews_on_music_instrument_id" ON "areviews" ("music_instrument_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "areviews" ("id","music_instrument_id","user_id","rating","feedback","created_at","updated_at")
+                     SELECT "id","music_instrument_id","user_id","rating","feedback","created_at","updated_at" FROM "reviews"[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE "reviews"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" integer NOT NULL PRIMARY KEY, "music_instrument_id" integer NOT NULL, "user_id" integer NOT NULL, "rating" integer NOT NULL, "feedback" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4a6c0cd0c0"
+FOREIGN KEY ("music_instrument_id")
+  REFERENCES "music_instruments" ("id")
+, CONSTRAINT "fk_rails_74a66bd6c5"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_music_instrument_id" ON "reviews" ("music_instrument_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX "index_reviews_on_user_id" ON "reviews" ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "reviews" ("id","music_instrument_id","user_id","rating","feedback","created_at","updated_at")
+                     SELECT "id","music_instrument_id","user_id","rating","feedback","created_at","updated_at" FROM "areviews"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "areviews"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (110.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (140.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (97.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20210225124656)[0m
+  [1m[35m (87.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20210112070523),
+(20210112115658),
+(20210112121941),
+(20210112162241),
+(20210113043511),
+(20210114071446),
+(20210126084032),
+(20210126084858),
+(20210127073516),
+(20210204091426),
+(20210204092326),
+(20210206204905),
+(20210208083015),
+(20210211210137),
+(20210211212505),
+(20210212163158),
+(20210225093057),
+(20210225095809),
+(20210225123134);
+
+[0m
+  [1m[35m (137.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2021-03-05 13:11:55.921180"], ["updated_at", "2021-03-05 13:11:55.921180"]]
+  [1m[35m (87.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "3da6f2d67e21f3d7a75b6c08adc201196e78400d"], ["created_at", "2021-03-05 13:11:56.019788"], ["updated_at", "2021-03-05 13:11:56.019788"]]
+  [1m[35m (103.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicCategory Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_categories" WHERE "music_categories"."category" = ? LIMIT ?[0m  [["category", "abcd"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicCategory Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_categories" WHERE "music_categories"."category" = ? LIMIT ?[0m  [["category", " "], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicCategory Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_categories" WHERE "music_categories"."category" = ? LIMIT ?[0m  [["category", "abcd"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicCategory Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_categories" WHERE "music_categories"."category" = ? LIMIT ?[0m  [["category", "R"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMusicInstrument Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "music_instruments" WHERE "music_instruments"."phone_number" = ? LIMIT ?[0m  [["phone_number", 9658455458], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "a@b.in"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "student.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "hello123@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) LIMIT ?[0m  [["email", "something@google.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "created_at", "updated_at", "provider", "uid", "name") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "something@google.com"], ["password_digest", "$2a$04$cWOIPsvEbhCFPlgo6IZqS.XJ77MnWOiVk6FkQvTqx.QtqpwKQVuwy"], ["created_at", "2021-03-05 13:11:57.179684"], ["updated_at", "2021-03-05 13:11:57.179684"], ["provider", "google"], ["uid", "12345678910"], ["name", "student"]]
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."provider" = ? AND "users"."uid" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["provider", "google"], ["uid", "12345678910"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER(?) AND "users"."id" != ? LIMIT ?[0m  [["email", "student@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "name" = ?, "email" = ?, "password_digest" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["name", "Aman Singh"], ["email", "student@gmail.com"], ["password_digest", "$2a$04$jdqnNigUQsrByjHcU53w6OsLhF2Ay8SiTSmpqUU6tw7V2mrGEj1eW"], ["updated_at", "2021-03-05 13:11:57.186350"], ["id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mrollback transaction[0m
