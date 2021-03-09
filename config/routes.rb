@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get '/posted_items' => 'music_instruments#posted_items'
   get '/required_items' => 'music_instruments#required_items'
   get '/filter_by_price' => 'music_instruments#filter_by_price'
-  get '/filter_by_date' => 'music_instruments#filter_by_date'
   get '/send_mail' => 'music_instruments#send_mail'
 
   scope '/admin' do

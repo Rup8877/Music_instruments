@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_25_124656) do
+ActiveRecord::Schema.define(version: 2021_03_09_044939) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 2021_02_25_124656) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer "conversation_id", null: false
     t.integer "user_id", null: false
@@ -67,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_02_25_124656) do
     t.boolean "approved_by", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "approved_by_id", default: "0"
     t.index ["music_category_id"], name: "index_music_instruments_on_music_category_id"
     t.index ["user_id"], name: "index_music_instruments_on_user_id"
   end

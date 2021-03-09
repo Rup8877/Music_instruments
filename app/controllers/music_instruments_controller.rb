@@ -41,6 +41,7 @@ class MusicInstrumentsController < ApplicationController
 
   def approve
     @music_instrument.update(approved_by: true)
+    @music_instrument.update(approved_by_id: current_user.id)
     redirect_to '/admin'
   end
 
@@ -53,11 +54,6 @@ class MusicInstrumentsController < ApplicationController
     @music_instruments = MusicInstrument.where(role: 'buyer')
   end
 
-  def filter_by_date
-    @music_instruments = MusicInstrument.where('created_at between (?) and (?)', params[:start_date],
-                                               params[:end_date])
-  end
-
   def filter_by_price
     @music_instruments = MusicInstrument.where('price <= ? ', params[:price])
   end
@@ -67,7 +63,7 @@ class MusicInstrumentsController < ApplicationController
   end
 
   def send_mail
-    NotificationMailer.with(user: current_user).send_notification_mail.deliver_now!
+    NotificationMailer.with(user: current_user).delay.send_notification_mail
     redirect_to root_path
   end
 

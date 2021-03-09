@@ -19,9 +19,7 @@
 		<%= text_field_tag 'price',params[:price] , placeholder:"enter maximum price" %>
 		<%=submit_tag 'find'%>
 		<%end%>
-
 	</div>
-
 
 	<div class="col-md-9 p-2  h-md-100 ">
 		<div class="row">
@@ -46,10 +44,13 @@
 					<div class="px-4">
 						<span>Rs <%= music_instrument.price %></span>
 					</div>
+					<% if current_user %>
+          <% if current_user.id != music_instrument.user_id %>
 					<div class="px-2">
 						<%= link_to 'Interested', send_mail_path, class: "btn btn-primary btn-sm" %>
 					</div>
-
+        <% end %>
+				<% end %>
 				</div>
 			</div>
 			<% end%>
