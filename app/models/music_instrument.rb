@@ -18,9 +18,9 @@ class MusicInstrument < ApplicationRecord
   private
 
   def image_type
-     images.each do |image|
-      if !image.content_type.in?(%('image/jpeg image/jpg image/png'))
-        errors.add(:images,'needs to be a JPEG or JPG or PNG' )
+    images.each do |image|
+      unless image.content_type.in?(%('image/jpeg image/jpg image/png'))
+        errors.add(:images, 'needs to be a JPEG or JPG or PNG')
       end
     end
   end

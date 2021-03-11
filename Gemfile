@@ -6,8 +6,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 gem 'active_storage_validations'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'devise'
 gem 'delayed_job_active_record'
+gem 'devise'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'faker'

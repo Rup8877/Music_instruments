@@ -39,6 +39,4 @@ RSpec.describe MusicCategory, type: :model do
   describe 'has_many :music_instruments' do
     it { is_expected.to have_many :music_instruments }
   end
-
-  
 end

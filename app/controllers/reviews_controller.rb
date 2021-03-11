@@ -27,13 +27,13 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     @review.music_instrument_id = @music_instrument.id
-      if @review.save
+    if @review.save
       redirect_to music_instrument_path(@music_instrument)
     else
       flash[:notice] = ' Invalid Rating or Feedback '
       redirect_to music_instrument_path(@music_instrument)
-      end
     end
+  end
 
   private
 

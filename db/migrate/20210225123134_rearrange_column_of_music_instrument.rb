@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RearrangeColumnOfMusicInstrument < ActiveRecord::Migration[6.0]
   def change
     remove_column :music_instruments, :item_tittle, :string
@@ -8,8 +10,8 @@ class RearrangeColumnOfMusicInstrument < ActiveRecord::Migration[6.0]
     remove_column :music_instruments, :approved_by, :boolean
     remove_column :music_instruments, :created_at
     remove_column :music_instruments, :updated_at
-    remove_reference :music_instruments, :music_category, null:false ,foreign_key: true
-    remove_reference :music_instruments, :user, null:false, foreign_key: true
+    remove_reference :music_instruments, :music_category, null: false, foreign_key: true
+    remove_reference :music_instruments, :user, null: false, foreign_key: true
     add_reference :music_instruments, :music_category, foreign_key: true
     add_reference :music_instruments, :user, foreign_key: true
     add_column :music_instruments, :item_tittle, :string

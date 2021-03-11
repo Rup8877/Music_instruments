@@ -15,25 +15,23 @@ class MusicInstrumentsController < ApplicationController
     @reviews = Review.where(music_instrument_id: @music_instrument.id).order('created_at DESC')
 
     if @reviews.blank?
-    @avg_review = 0
-      else
-    @avg_review = @reviews.average(:rating).round(2)
-        end
+              @avg_review = 0
+                  else
+                    @reviews.average(:rating).round(2)
+                  end
     @conversation = Conversation.where(music_instrument_id: @music_instrument.id)
   end
 
   def home
-    if (params[:category].blank? && params[:name].blank?)
+    if params[:category].blank? && params[:name].blank?
       @music_instruments = MusicInstrument.all.order('created_at DESC')
-    else
-      if params[:category].blank?
-        @sub_category_id = SubCategory.find_by(name: params[:name])
+    elsif params[:category].blank?
+      @sub_category_id = SubCategory.find_by(name: params[:name])
       @music_instruments = MusicInstrument.where(sub_category_id: @sub_category_id).order('created_at DESC')
 
-      else
-       @music_category_id = MusicCategory.find_by(category: params[:category])
+    else
+      @music_category_id = MusicCategory.find_by(category: params[:category])
       @music_instruments = MusicInstrument.where(music_category_id: @music_category_id).order('created_at DESC')
-end
 
     end
   end
@@ -89,7 +87,7 @@ end
 
     respond_to do |format|
       if @music_instrument.save
-        format.html { redirect_to @music_instrument, notice: 'music instrument created'}
+        format.html { redirect_to @music_instrument, notice: 'music instrument created' }
         format.json { render :show, status: :created, location: @music_instrument }
       else
         format.html { render :new }

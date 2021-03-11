@@ -8,7 +8,7 @@ class MusicCategoriesController < ApplicationController
   end
 
   def show
-@sub_categories=SubCategory.where(music_category_id: @music_category.id).order("created_at DESC")
+    @sub_categories = SubCategory.where(music_category_id: @music_category.id).order('created_at DESC')
   end
 
   def new
@@ -22,7 +22,7 @@ class MusicCategoriesController < ApplicationController
 
     respond_to do |format|
       if @music_category.save
-        format.html { redirect_to @music_category}
+        format.html { redirect_to @music_category }
         format.json { render :show, status: :created, location: @music_category }
       else
         format.html { render :new }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnToNullOfMusicInstrument < ActiveRecord::Migration[6.0]
   def change
     change_column_null :music_instruments, :item_tittle, false
