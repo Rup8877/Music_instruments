@@ -3,5 +3,13 @@
   <%= @music_category.category %>
 </p>
 
+<% @sub_categories.each do |sub| %>
+  <tr>
+    <td><%= sub.name %></td><br>
+    </tr>
+    <%end%>
+
+  <%=render 'sub_categories/form'%>
+
 <%= link_to 'Edit', edit_music_category_path(@music_category) %> |
 <%= link_to 'Back', music_categories_path %>

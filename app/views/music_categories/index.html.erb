@@ -1,12 +1,12 @@
+<div class=" container ">
+  <table class="table table-bordered">
 
-
-<h1>Music Categories</h1>
-
-<table>
   <thead>
     <tr>
       <th>Category</th>
-      <th colspan="3"></th>
+      <th>Action</th>
+      <th>Action</th>
+      <th>Action</th>
     </tr>
   </thead>
 
@@ -20,8 +20,11 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
+</div>
 
-<br>
-
-<%= link_to 'New Music Category', new_music_category_path %>
+<div class="row justify-content-center my-4">
+  <div class="col-2">
+    <strong><%= link_to "Add Music Category", new_music_category_path, class: "btn btn-primary btn-md btn-block my-2 my-sm-0" %></strong>
+  </div>
+</div>

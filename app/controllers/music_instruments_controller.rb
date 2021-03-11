@@ -23,11 +23,18 @@ class MusicInstrumentsController < ApplicationController
   end
 
   def home
-    if params[:category].blank?
+    if (params[:category].blank? && params[:name].blank?)
       @music_instruments = MusicInstrument.all.order('created_at DESC')
     else
-      @music_category_id = MusicCategory.find_by(category: params[:category])
+      if params[:category].blank?
+        @sub_category_id = SubCategory.find_by(name: params[:name])
+      @music_instruments = MusicInstrument.where(sub_category_id: @sub_category_id).order('created_at DESC')
+
+      else
+       @music_category_id = MusicCategory.find_by(category: params[:category])
       @music_instruments = MusicInstrument.where(music_category_id: @music_category_id).order('created_at DESC')
+end
+
     end
   end
 
@@ -133,6 +140,6 @@ class MusicInstrumentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def music_instrument_params
     params.require(:music_instrument).permit(:item_tittle, :music_category_id, :item_description, :user_id,
-                                             :phone_number, :price, :role, :approved_by, images: [])
+                                             :phone_number, :price, :role, :approved_by, :sub_category_id, images: [])
   end
 end

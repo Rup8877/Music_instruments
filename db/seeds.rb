@@ -19,9 +19,20 @@ MusicCategory.create(category: "Guitar")
 MusicCategory.create(category: "Keyboard")
 
 
+SubCategory.create(name: 'Tabla A', music_category_id: 1)
+SubCategory.create(name: 'Tabla B', music_category_id: 1)
+SubCategory.create(name: 'Drum A', music_category_id: 2)
+SubCategory.create(name: 'Electric Guitar', music_category_id: 3)
+SubCategory.create(name: 'Traditional Keyboard', music_category_id: 4)
+
+
+
+
+
 music_instrument = MusicInstrument.new
 music_instrument.user_id = User.first.id
 music_instrument.music_category_id = MusicCategory.first.id
+music_instrument.sub_category_id = SubCategory.first.id
 music_instrument.item_tittle = 'tabla'
 music_instrument.item_description = 'A tabla is a pair of twin hand drums from the Indian subcontinent.'
 music_instrument.phone_number = 9645879523
@@ -34,6 +45,7 @@ music_instrument.save!
 music_instrument = MusicInstrument.new
 music_instrument.user_id = User.second.id
 music_instrument.music_category_id = MusicCategory.second.id
+music_instrument.sub_category_id = SubCategory.third.id
 music_instrument.item_tittle = 'drum'
 music_instrument.item_description = 'The drum is a member of the percussion group of musical instruments.'
 music_instrument.phone_number = 9589665563
@@ -46,6 +58,7 @@ music_instrument.save!
 music_instrument = MusicInstrument.new
 music_instrument.user_id = User.third.id
 music_instrument.music_category_id = MusicCategory.third.id
+music_instrument.sub_category_id = SubCategory.fourth.id
 music_instrument.item_tittle = 'guitar'
 music_instrument.item_description = 'The guitar is a fretted musical instrument that typically has six strings.'
 music_instrument.phone_number = 9645879598
@@ -57,6 +70,7 @@ music_instrument.save!
 music_instrument = MusicInstrument.new
 music_instrument.user_id = User.fourth.id
 music_instrument.music_category_id = MusicCategory.fourth.id
+music_instrument.sub_category_id = SubCategory.fifth.id
 music_instrument.item_tittle = 'keyboard'
 music_instrument.item_description = 'good for using'
 music_instrument.phone_number = 9645879958

@@ -18,16 +18,14 @@
 </div>
 
 <div class="form-group row">
-  <%= form.label :music_category,"Music Category:", for: "music_category"  %>
-  <div class="col-6 form-control">
-  <%= form.select(:music_category_id) do %>
-  <% MusicCategory.all.each do |c| %>
-  <%= content_tag(:option, c.category, value: c.id)%>
-  <% end %>
-  <% end %>
-</div>
+  <%= form.label :music_category %>
+<%= form.collection_select :music_category_id, MusicCategory.all, :id, :category, { prompt: "Choose a category" }, id: "category_id" %>
 </div>
 
+<div class= "form-group row">
+  <%= form.label :sub_category %>
+   <%= form.grouped_collection_select :sub_category_id, MusicCategory.all, :sub_categories,:category, :id, :name, {prompt: "Choose a subcategory"}%>
+</div>
 
 <div class="form-group row">
   <%= form.label :item_description %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_044939) do
+ActiveRecord::Schema.define(version: 2021_03_11_064451) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,7 +83,9 @@ ActiveRecord::Schema.define(version: 2021_03_09_044939) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "approved_by_id", default: "0"
+    t.integer "sub_category_id"
     t.index ["music_category_id"], name: "index_music_instruments_on_music_category_id"
+    t.index ["sub_category_id"], name: "index_music_instruments_on_sub_category_id"
     t.index ["user_id"], name: "index_music_instruments_on_user_id"
   end
 
@@ -96,6 +98,14 @@ ActiveRecord::Schema.define(version: 2021_03_09_044939) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["music_instrument_id"], name: "index_reviews_on_music_instrument_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "music_category_id", null: false
+    t.index ["music_category_id"], name: "index_sub_categories_on_music_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -114,7 +124,9 @@ ActiveRecord::Schema.define(version: 2021_03_09_044939) do
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "music_instruments", "music_categories"
+  add_foreign_key "music_instruments", "sub_categories"
   add_foreign_key "music_instruments", "users"
   add_foreign_key "reviews", "music_instruments"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sub_categories", "music_categories"
 end

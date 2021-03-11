@@ -1,5 +1,6 @@
 <div class="d-md-flex h-md-100 ">
-	<div class="col-md-3 p-2  h-md-100">
+	<div class="col-md-3 p-2  h-md-100 bg-warning">
+		<div class="container">
 		<h1>Filtration</h1>
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
@@ -8,6 +9,11 @@
 					<% MusicCategory.all.each do |c| %>
 					<li>
 						<%= link_to c.category,root_path(category:c.category),class:"link" %>
+						<% c.sub_categories.each do |d| %>
+						<li>
+							<%= link_to d.name,root_path(name:d.name),class:"link" %>
+					</li>
+					<%end%>
 					</li>
 					<%end%>
 				</ul>
@@ -20,6 +26,7 @@
 		<%=submit_tag 'find'%>
 		<%end%>
 	</div>
+</div>
 
 	<div class="col-md-9 p-2  h-md-100 ">
 		<div class="row">
