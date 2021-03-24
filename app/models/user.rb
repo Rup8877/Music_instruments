@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :music_instruments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   validates :password, presence: true, length: { maximun: 20, minimum: 6 }
   validates :name, presence: true, format: { with: VALID_NAME_REGEX }, length: { maximum: 30, minimum: 2 }

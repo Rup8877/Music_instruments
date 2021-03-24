@@ -6,9 +6,8 @@ class MusicInstrumentsController < ApplicationController
   # GET /music_instruments
   # GET /music_instruments.json
   def index
-    @music_instruments = MusicInstrument.all
-  end
-
+    @music_instruments = MusicInstrument.where(role: params[:role]) if params[:role].present?
+end
   # GET /music_instruments/1
   # GET /music_instruments/1.json
   def show
@@ -17,7 +16,7 @@ class MusicInstrumentsController < ApplicationController
     if @reviews.blank?
               @avg_review = 0
                   else
-                    @reviews.average(:rating).round(2)
+                @avg_review = @reviews.average(:rating).round(2)
                   end
     @conversation = Conversation.where(music_instrument_id: @music_instrument.id)
   end
@@ -36,14 +35,6 @@ class MusicInstrumentsController < ApplicationController
     end
   end
 
-  def buyer_posts
-    @music_instruments = MusicInstrument.where(role: 'buyer')
-  end
-
-  def seller_posts
-    @music_instruments = MusicInstrument.where(role: 'seller')
-  end
-
   def approve
     @music_instrument.update(approved_by: true)
     @music_instrument.update(approved_by_id: current_user.id)
@@ -55,16 +46,8 @@ class MusicInstrumentsController < ApplicationController
     redirect_to '/admin'
   end
 
-  def posted_items
-    @music_instruments = MusicInstrument.where(role: 'buyer')
-  end
-
   def filter_by_price
     @music_instruments = MusicInstrument.where('price <= ? ', params[:price])
-  end
-
-  def required_items
-    @music_instruments = MusicInstrument.where(role: 'seller')
   end
 
   def send_mail

@@ -9,13 +9,14 @@
           <%= image_tag(music_instrument.images.first, style: 'height:200px; width:100px;')%>
           <%end%>
         </div>
-
         <div class="px-4">
           <span> Item tittle - <%= music_instrument.item_tittle %></span>
         </div>
-
         <div class="px-4">
-          <span> User -<td><%= music_instrument.user.name %></td></span>
+          <span>
+            User -
+            <td><%= music_instrument.user.name %></td>
+          </span>
         </div>
         <div class="px-4">
           <span>Rs <%= music_instrument.price %></span>
@@ -24,7 +25,6 @@
           <%= link_to 'Approve', approve_music_instrument_path(music_instrument), class: "btn btn-primary btn-sm", method: :patch %>
           <%= link_to 'Reject', reject_music_instrument_path(music_instrument), class: "btn btn-primary btn-sm", method: :patch%>
         </div>
-
       </div>
     </div>
     <% end%>

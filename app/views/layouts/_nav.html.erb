@@ -15,10 +15,10 @@
     </li>
 
     <li class="nav-item active">
-      <a class="nav-link" <%= link_to 'List of posted instruments', posted_items_path %></a>
+      <a class="nav-link" <%= link_to 'List of posted instruments', music_instruments_path(:role => :buyer) %></a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" <%= link_to 'List of requirements for instruments', required_items_path %></a>
+      <a class="nav-link" <%= link_to 'List of requirements for instruments', music_instruments_path(:role => :seller) %></a>
     </li>
     <li class="nav-item active">
       <% if current_user %>

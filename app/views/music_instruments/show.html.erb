@@ -1,32 +1,31 @@
 
 <div class="container">
   <div class="row">
-
     <div class="col-6">
-      <div class="container p-3 my-3 border">
+      <div class="card m-3">
+        <div class="mx-auto d-block">
         <% (0...@music_instrument.images.count).each do |image| %>
         <%= image_tag(@music_instrument.images[image] ,style: 'height:300px; width:200px;')%>
         <%end%>
       </div>
-    </div>
+       </div>
+        </div>
 
     <div class="col-6">
-      <div class="card  p-5 m-5" style="width:600px">
+      <div class="card  p-5 m-5">
         <div class="card-body">
           <h4 class="card-title"> <%= @music_instrument.item_tittle %></h4>
           <h4 class="card-title"> <strong>Price: &#x20B9;</strong> <%= @music_instrument.price %></h4>
-
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <div class="card p-5 m-3" style= "width:600px">
+      <div class="card p-5 m-3">
         <div class="body">
           <p class="card-text"> <strong> Category - </strong> <%= @music_instrument.music_category.category%> </p>
           <p class="card-text"> <strong> Description - </strong> <%= @music_instrument.item_description %> </p>
@@ -34,12 +33,12 @@
       </div>
     </div>
 
-    <div class="col-4">
-      <div class="card p-3 m-5" style="width:600px">
+    <div class="col-6">
+      <div class="card p-5">
         <div class="card-body">
           <h5 class="card-title"><strong> <%= @music_instrument.role %> description </strong></h5>
           <h4 class="card-title"> Name : <%= @music_instrument.user.name %></h4>
-          <p class="card-text"> <strong> Phone  - </strong> <%= @music_instrument.phone_number %> </p>
+          <p class="card-tittle"> <strong> Phone  - </strong> <%= @music_instrument.phone_number %> </p>
           <% if @music_instrument.approved_by == true%>
           <p>
             <% if  current_user.id != @music_instrument.user_id %>
@@ -56,7 +55,10 @@
 </div>
 <div class="container p-3 my-3 border">
 
-<%=render 'reviews/form'%>
+<% if  current_user.id != @music_instrument.user_id %>
+<%= render 'reviews/form' %>
+<%= render 'posts/new' %>
+<% end %>
 
 <div class="card">
 
@@ -72,6 +74,9 @@
       <tr>
         <td>Rating : <%= review.rating %></td><br>
         <td>Feedback : <%= review.feedback %></td>
+        <% if review.user_id == current_user.id %>
+        <%= link_to "Edit", edit_music_instrument_review_path(review.music_instrument, review), class: "btn btn-primary" %>
+        <% end %>
       </tr>
       <br>
       <br>
@@ -85,6 +90,6 @@
 
   <% if @music_instrument.approved_by == false%>
   <%= link_to 'Edit', edit_music_instrument_path(@music_instrument) %>
-  <%= link_to 'Back', music_instruments_path %>
+  <%= link_to 'Back', root_path %>
   <%end%>
 </div>

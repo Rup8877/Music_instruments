@@ -13,7 +13,7 @@ class RearrangeColumnOfMusicInstrument < ActiveRecord::Migration[6.0]
     remove_reference :music_instruments, :music_category, null: false, foreign_key: true
     remove_reference :music_instruments, :user, null: false, foreign_key: true
     add_reference :music_instruments, :music_category, foreign_key: true
-    add_reference :music_instruments, :user, foreign_key: true
+    add_reference :music_instruments, :user, foreign_key: true 
     add_column :music_instruments, :item_tittle, :string
     add_column :music_instruments, :item_description, :text
     add_column :music_instruments, :phone_number, :integer

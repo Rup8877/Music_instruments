@@ -2,6 +2,7 @@
 
 <div class="btn-group btn-group-lg">
     <a href="/admin/music_categories" class="btn btn-primary" role="button" >Create Music Category</a>
-    <a href= "/admin/buyer_posts" class="btn btn-primary" role="button" >Check Buyer Posts</a>
-    <a href= "/admin/seller_posts" class="btn btn-primary" role="button" >Check Seller Posts</a>
+
   </div>
+
+<%= link_to 'Check buyer posts', music_instruments_path(:role => :buyer)%>

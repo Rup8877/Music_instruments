@@ -35,6 +35,14 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def update
+		if @review.update(review_params)
+			redirect_to music_instrument_path(@music_instrument)
+		else
+			redirect_to music_instrument_path(@music_instrument)
+		end
+	end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
