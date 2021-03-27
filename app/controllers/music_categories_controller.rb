@@ -51,6 +51,19 @@ class MusicCategoriesController < ApplicationController
     end
   end
 
+  def fetch_sub_categories
+    result = {}
+    sub_categories = MusicCategory.where(parent_id: params[:category_id])
+    if sub_categories.present?
+      sub_categories.each do |sub_category|
+        result[sub_category.id] = sub_category.category
+      end
+    end
+    respond_to do |format|
+      format.json { render json: result.to_json }
+    end
+  end
+
   private
 
   def set_music_category

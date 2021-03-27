@@ -1,0 +1,28 @@
+<div class="row">
+	<% if music_instruments.present? %>
+		<% music_instruments.each do |music_instrument| %>
+			<div class="col-md-4">
+				<%= link_to  music_instrument do %>
+					<div class="card" style="width: 20.6rem;height: 18rem">
+						<% if music_instrument.images.attached? %>
+							<%= image_tag music_instrument.images.first, size: '100x100', class: 'card-img-top' %>
+						<% else %>
+							<img class="card-img-top" src="..." alt="No image">
+						<% end %>
+					  <div class="card-body">
+					    <h5 class="card-title"><%= music_instrument.item_tittle %></h5>
+					    <div>User - <%= music_instrument.user.name %></div>
+					    <div>Rs <%= music_instrument.price %></div>
+					    <% if current_user.present? && (current_user.id != music_instrument.user_id) %>
+								<%= link_to 'Interested', send_mail_path, class: "btn btn-primary" %>
+			      	<% end %>
+					  </div>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+	<% else %>
+		<br><br>
+		<center><h6 style="color: red">No record found</h6></center>
+	<% end %>
+</div>

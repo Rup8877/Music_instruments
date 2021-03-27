@@ -5,24 +5,36 @@
     <div class="card-header text-center">
       <h3>New Music Instrument </h3>
     </div>
-    <div class="card-body text-center p-5">
+    <div class="card-body p-5">
       <div class="form-group row">
-        <%= form.label :item_tittle %>
-        <div class="col-6">
-          <%= form.text_field :item_tittle ,placeholder:"Enter tittle", class:"form-control", required:true %>
+        <div class="col-md-3">
+          <%= form.label :item_tittle %>
+        </div>
+        <div class="col-md-9">
+          <%= form.text_field :item_tittle ,placeholder:"Enter tittle", class: "form-control", required: true %>
         </div>
       </div>
       <div class="form-group row">
-        <%= form.label :music_category %>
-        <%= form.collection_select :music_category_id, MusicCategory.all, :id, :category, { prompt: "Choose a category" }, id: "category_id" %>
+        <div class="col-md-3">
+          <%= form.label :music_category %>
+        </div>
+        <div class="col-md-9">
+          <%= form.collection_select :music_category_id, MusicCategory.where(parent_id: nil), :id, :category, { prompt: "Choose a category" }, id: "category_id", class: 'form-control', required: true, onchange: 'setSubCategory()' %>
+        </div>
       </div>
       <div class= "form-group row">
-        <%= form.label :sub_category %>
-        <%= form.grouped_collection_select :sub_category_id, MusicCategory.all, :sub_categories,:category, :id, :name, {prompt: "Choose a subcategory"}%>
+        <div class="col-md-3">
+          <%= form.label :sub_category %>
+        </div>
+        <div class="col-md-9">
+          <%= form.select :sub_category_id, options_for_select([]), {prompt: 'Choose a sub-category'}, class: 'form-control' %>
+        </div>
       </div>
       <div class="form-group row">
-        <%= form.label :item_description %>
-        <div class="col-6 ">
+        <div class="col-md-3">
+          <%= form.label :item_description %>
+        </div>
+        <div class="col-md-9">
           <%= form.text_area :item_description ,placeholder:" Write description ", class:"form-control", required:true %>
         </div>
       </div>
@@ -30,26 +42,34 @@
         <%= form.hidden_field :user_id, value: current_user.id %>
       </div>
       <div class="form-group row">
-        <%= form.label :phone_number %>
-        <div class="col-6">
-          <%= form.number_field :phone_number ,placeholder:"Enter phone number", class:"form-control", required:true%>
+        <div class="col-md-3">
+          <%= form.label :phone_number %>
+        </div>
+        <div class="col-md-9">
+          <%= form.number_field :phone_number, placeholder: "Enter phone number", class: "form-control", required: true %>
         </div>
       </div>
       <div class="form-group row">
-        <%= form.label :price %>
-        <div class="col-6">
-          <%= form.number_field :price,placeholder:"Enter price", class:"form-control", required:true %>
+        <div class="col-md-3">
+          <%= form.label :price %>
+        </div>
+        <div class="col-md-9">
+          <%= form.number_field :price, placeholder: "Enter price", class: "form-control", required: true %>
         </div>
       </div>
       <div class="form-group row">
-        <%=form.label :image %>
-        <div class="col-6">
-          <%=form.file_field :images , multiple:true, class:"form-control", required:true %>
+        <div class="col-md-3">
+          <%= form.label :image %>
+        </div>
+        <div class="col-md-9">
+          <%= form.file_field :images, multiple: true, class: "form-control"%>
         </div>
       </div>
       <div class="form-group row">
-        <%=form.label :Users_role %>
-        <div class="col-6 form-control">
+        <div class="col-md-3">
+          <%= form.label :Users_role %>
+        </div>
+        <div class="col-md-9 form-control">
           <%= form.radio_button :role, "buyer" %>
           <%= form.label :role_buyer, "Buyer" %>
           <%= form.radio_button :role, "seller" %>
@@ -68,3 +88,21 @@
   </div>
 </div>
 <% end %>
+<script type="text/javascript">
+  function setSubCategory() {
+    $('#music_instrument_sub_category_id').find('option').remove().end().append('<option value="">Choose a sub-category</option>').val('');
+    var categoryId = $('#category_id').val()
+    $.ajax({
+      url: '/admin/music_categories/fetch_sub_categories'+'?category_id=' + categoryId,
+      type: 'GET',
+      success: function(data){
+        var jsonData = Object(data)
+        var keys = Object.keys(data)
+        var length = keys.length;
+        for(var k = 0; k < length; k++){
+          $("#music_instrument_sub_category_id").append(new Option(jsonData[keys[k]], keys[k]));
+        }
+      }
+    });
+  }
+</script>

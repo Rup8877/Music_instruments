@@ -8,6 +8,7 @@ class MusicInstrument < ApplicationRecord
 
   has_many_attached :images
   has_many :reviews, dependent: :destroy
+  belongs_to :approver, class_name: "User", optional: true
 
   validates :item_tittle, presence: true, length: { maximum: 50, minimum: 2 }
   validates :item_description, presence: true, length: { maximum: 5000, minimum: 10 }

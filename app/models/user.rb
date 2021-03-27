@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
 
   has_many :music_instruments, dependent: :destroy
+  has_many :approved_musics, class_name: "MusicInstrument", foreign_key: 'approver_id'
   has_many :messages, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :posts, dependent: :destroy

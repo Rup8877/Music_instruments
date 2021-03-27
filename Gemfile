@@ -23,7 +23,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 4.0'
-
+gem 'pry'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
@@ -36,6 +36,7 @@ end
 gem 'better_errors'
 
 group :development do
+  
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

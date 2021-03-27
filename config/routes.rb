@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   resources :music_categories, path: '/admin/music_categories' do
+    collection do 
+      get 'fetch_sub_categories'
+    end
     resources :sub_categories
   end
 

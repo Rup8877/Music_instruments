@@ -3,13 +3,9 @@
 class MusicInstrumentsController < ApplicationController
   before_action :set_music_instrument, only: %i[show edit update destroy approve reject]
   before_action :authenticate_user!, except: %i[search home]
-  # GET /music_instruments
-  # GET /music_instruments.json
   def index
     @music_instruments = MusicInstrument.where(role: params[:role]) if params[:role].present?
 end
-  # GET /music_instruments/1
-  # GET /music_instruments/1.json
   def show
     @reviews = Review.where(music_instrument_id: @music_instrument.id).order('created_at DESC')
 
@@ -22,16 +18,17 @@ end
   end
 
   def home
-    if params[:category].blank? && params[:name].blank?
-      @music_instruments = MusicInstrument.all.order('created_at DESC')
-    elsif params[:category].blank?
-      @sub_category_id = SubCategory.find_by(name: params[:name])
-      @music_instruments = MusicInstrument.where(sub_category_id: @sub_category_id).order('created_at DESC')
-
+    if params[:sub_categor_ids].present? && params[:remote].present?
+      @music_instruments = MusicInstrument.where(sub_category_id: params[:sub_categor_ids], approved_by: true).order('created_at DESC')
+      respond_to :js
+    elsif params[:min_price].present? && params[:max_price].present?
+      @music_instruments = MusicInstrument.where('price BETWEEN ? AND ?', params[:min_price], params[:max_price], true)
+    elsif params[:min_price].present?
+      @music_instruments = MusicInstrument.where('price <= ? AND approved_by = ?', params[:min_price], true)
+    elsif params[:max_price].present?
+      @music_instruments = MusicInstrument.where('price >= ? AND approved_by = ?', params[:min_price], true)
     else
-      @music_category_id = MusicCategory.find_by(category: params[:category])
-      @music_instruments = MusicInstrument.where(music_category_id: @music_category_id).order('created_at DESC')
-
+      @music_instruments = MusicInstrument.where(approved_by: true).order('created_at DESC')
     end
   end
 

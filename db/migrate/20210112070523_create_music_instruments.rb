@@ -7,7 +7,8 @@ class CreateMusicInstruments < ActiveRecord::Migration[6.0]
       t.text :item_description
       t.integer :phone_number
       t.integer :price
-
+      t.references  :approver
+      
       t.timestamps
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_133507) do
+ActiveRecord::Schema.define(version: 2021_03_11_064451) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,11 +67,14 @@ ActiveRecord::Schema.define(version: 2021_03_24_133507) do
 
   create_table "music_categories", force: :cascade do |t|
     t.string "category", null: false
+    t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_music_categories_on_parent_id"
   end
 
   create_table "music_instruments", force: :cascade do |t|
+    t.integer "approver_id"
     t.integer "music_category_id", null: false
     t.integer "user_id", null: false
     t.string "item_tittle", null: false
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_133507) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sub_category_id"
-    t.integer "approved_by_id"
+    t.index ["approver_id"], name: "index_music_instruments_on_approver_id"
     t.index ["music_category_id"], name: "index_music_instruments_on_music_category_id"
     t.index ["sub_category_id"], name: "index_music_instruments_on_sub_category_id"
     t.index ["user_id"], name: "index_music_instruments_on_user_id"
